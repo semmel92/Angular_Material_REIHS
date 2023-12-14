@@ -2,8 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BackendService } from 'src/app/shared/backend.service';
 import { StoreService } from 'src/app/shared/store.service';
-
-declare var $: any; // Falls Sie jQuery für den Toast verwenden
+import { MatSnackBar } from '@angular/material/snack-bar';  
 
 @Component({
   selector: 'app-add-data',
@@ -17,7 +16,8 @@ export class AddDataComponent implements OnInit {
   constructor(
     private formbuilder: FormBuilder,
     public storeService: StoreService,
-    public backendService: BackendService
+    public backendService: BackendService,
+    private snackBar: MatSnackBar 
   ) { }
 
   ngOnInit(): void {
@@ -32,10 +32,12 @@ export class AddDataComponent implements OnInit {
     if (this.addChildForm && this.addChildForm.valid) {
       this.backendService.addChildData(this.addChildForm.value, this.currentPage).subscribe({
         next: (_) => {
-          // Erfolgsfall
-          $('#successToast').toast('show');
+          // Snackbar anstelle von jQuery verwenden
+          this.snackBar.open('Das Kind wurde erfolgreich angemeldet!', 'Schließen', {
+            duration: 3000
+          });
           console.log('Kind hinzugefügt');
-          this.backendService.getChildren(this.currentPage);  // Korrekter Aufruf
+          this.backendService.getChildren(this.currentPage);
         },
         error: (error) => {
           console.error('Fehler beim Hinzufügen des Kindes:', error);
@@ -45,5 +47,4 @@ export class AddDataComponent implements OnInit {
       console.log('Formular ist ungültig');
     }
   }
-  
 }

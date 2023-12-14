@@ -9,8 +9,9 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 export class DashboardComponent {
   public currentPage: number = 1;
   public showAddData = true;
-  public title: string = 'Ihr Dashboard-Titel';
-  public imagePath: string = 'Pfad/Zum/Bild.jpg';
+  public title: string = 'Matthias Reihs Kindergarten';
+  public imagePath: string = 'assets/images/kindergarden.jpg';
+
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   totalItems = 100; 
