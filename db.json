@@ -65,6 +65,24 @@
       "kindergardenId": 2,
       "birthDate": "2021-06-01T22:00:00.000Z",
       "id": "eMnGWLD"
+    },
+    {
+      "name": "Bernd Henkas",
+      "kindergardenId": 1,
+      "birthDate": "2020-10-06T22:00:00.000Z",
+      "id": "fJ5waw0"
+    },
+    {
+      "name": "Damas Allert",
+      "kindergardenId": 2,
+      "birthDate": "2021-01-03T23:00:00.000Z",
+      "id": "Dw8oWBs"
+    },
+    {
+      "name": "Domes Puggner",
+      "kindergardenId": 2,
+      "birthDate": "2018-02-05T23:00:00.000Z",
+      "id": "aGtc75t"
     }
   ],
   "kindergardens": [
