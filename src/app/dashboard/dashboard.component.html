@@ -1,4 +1,20 @@
-<app-data [currentPage]="currentPage" (selectPageEvent)="receiveMessage($event)"></app-data>
-<br>
-<app-button [showAddData]="showAddData" (toggleButtonClickEvent)="toggleButtonClicked($event)"></app-button>
-<app-add-data *ngIf="showAddData" [currentPage]="currentPage"></app-add-data>
+<!-- Navigationsbereich -->
+<div class="flex">
+    <h1>{{ title }}</h1>
+    <img width="500" src={{imagePath}}>&nbsp;&nbsp;
+    <a [routerLink]="['/dashboard']">Dashboard</a>&nbsp;&nbsp;
+    <a [routerLink]="['/about']">About</a>
+</div>
+
+<!-- Hauptinhalt in einer Material Card -->
+<mat-card>
+  <mat-card-content>
+    <app-data [currentPage]="currentPage" (selectPageEvent)="receiveMessage($event)"></app-data>
+    <br>
+    <app-button [showAddData]="showAddData" (toggleButtonClickEvent)="toggleButtonClicked($event)"></app-button>
+    <app-add-data *ngIf="showAddData" [currentPage]="currentPage"></app-add-data>
+  </mat-card-content>
+</mat-card>
+
+<!-- Paginator außerhalb der Material Card -->
+<mat-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [length]="totalItems" (page)="onPageChange($event)"></mat-paginator>

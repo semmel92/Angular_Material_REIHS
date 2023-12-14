@@ -2,7 +2,7 @@ export interface Kindergarden {
     id: number;
     name: string;
     address: string;
-    betreiber: string;
+    PLZ: string;
     typ: Typ,
   }
 
