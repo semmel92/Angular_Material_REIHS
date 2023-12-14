@@ -22,9 +22,9 @@ export class AddDataComponent implements OnInit {
 
   ngOnInit(): void {
     this.addChildForm = this.formbuilder.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
       kindergardenId: ['', Validators.required],
-      birthDate: ['', Validators.required]
+      birthDate: ['', [Validators.required,]]
     });
   }
 
