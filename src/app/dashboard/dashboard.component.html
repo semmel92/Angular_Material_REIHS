@@ -1,12 +1,17 @@
-<!-- Hauptinhalt in einer Material Card -->
 <mat-card>
   <mat-card-content>
-    <app-data [currentPage]="currentPage" (selectPageEvent)="receiveMessage($event)"></app-data>
-    <br>
-    <app-button [showAddData]="showAddData" (toggleButtonClickEvent)="toggleButtonClicked($event)"></app-button>
-    <app-add-data *ngIf="showAddData" [currentPage]="currentPage"></app-add-data>
+    <div *ngIf="isLoading" class="loading-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="!isLoading">
+      <a [routerLink]="['/kindergartens']" mat-button>Detailansicht Kindergärten</a>
+      <br><br>
+      <app-data [currentPage]="currentPage" (selectPageEvent)="receiveMessage($event)"></app-data>
+      <br>
+      <app-button [showAddData]="showAddData" (toggleButtonClickEvent)="toggleButtonClicked($event)"></app-button>
+      <app-add-data *ngIf="showAddData" [currentPage]="currentPage"></app-add-data>
+    </div>
   </mat-card-content>
 </mat-card>
 
-<!-- Paginator außerhalb der Material Card -->
 <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [length]="totalItems" (page)="onPageChange($event)"></mat-paginator>

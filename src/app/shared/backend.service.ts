@@ -1,38 +1,41 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Kindergarden } from './interfaces/Kindergarden';
-import { StoreService } from './store.service';
-import { Child, ChildResponse } from './interfaces/Child';
-import { CHILDREN_PER_PAGE } from './constants';
 import { Observable } from 'rxjs';
+import { Kindergarden } from './interfaces/Kindergarden';
+import { Child, ChildResponse } from './interfaces/Child';
+import { StoreService } from './store.service';
+import { CHILDREN_PER_PAGE } from './constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
-
   constructor(private http: HttpClient, private storeService: StoreService) { }
 
-  public getKindergardens() {
-    this.http.get<Kindergarden[]>('http://localhost:5000/kindergardens').subscribe(data => {
-      this.storeService.kindergardens = data;
-    });
+  public getKindergardens(): Observable<Kindergarden[]> {
+    return this.http.get<Kindergarden[]>('http://localhost:5000/kindergardens');
   }
 
-  public getChildren(page: number) {
-    this.http.get<ChildResponse[]>(`http://localhost:5000/childs?_expand=kindergarden&_page=${page}&_limit=${CHILDREN_PER_PAGE}`, { observe: 'response' }).subscribe(data => {
-      this.storeService.children = data.body!;
-      this.storeService.childrenTotalCount = Number(data.headers.get('X-Total-Count'));
-
-    });
+  public getChildren(page: number, filter?: { kindergardenId?: number }, sort?: { field: string, order: 'asc' | 'desc' }): Observable<ChildResponse[]> {
+    let queryParams = `_page=${page}&_limit=${CHILDREN_PER_PAGE}`;
+    if (filter && filter.kindergardenId) {
+      queryParams += `&kindergardenId=${filter.kindergardenId}`;
     }
-    public addChildData(child: Child, page: number): Observable<any> {
-      return this.http.post('http://localhost:5000/childs', child);
+    if (sort) {
+      queryParams += `&_sort=${sort.field}&_order=${sort.order}`;
     }
-    
-    public deleteChildData(childId: string, page: number) {
-      this.http.delete(`http://localhost:5000/childs/${childId}`).subscribe(_=> {
-        this.getChildren(page);
-      })
-    }
+    return this.http.get<ChildResponse[]>(`http://localhost:5000/childs?_expand=kindergarden&${queryParams}`);
   }
+
+  public addChildData(child: Child): Observable<any> {
+    return this.http.post('http://localhost:5000/childs', child);
+  }
+
+  public deleteChildData(childId: string): Observable<any> {
+    return this.http.delete(`http://localhost:5000/childs/${childId}`);
+  }
+
+  public getKindergartenDetails(id: string): Observable<Kindergarden> {
+    return this.http.get<Kindergarden>(`http://localhost:5000/kindergardens/${id}`);
+  }
+}

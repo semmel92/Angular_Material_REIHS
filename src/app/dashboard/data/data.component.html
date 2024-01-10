@@ -1,31 +1,61 @@
-<div class="container">
-    <!-- Kopfzeile der Tabelle -->
-    <div class="row justify-content-center align-items-center data-header">
-        <!-- Spaltenüberschriften -->
-        <p class="col-xl-2 col-lg-3">Name</p>
-        <p class="col-xl-2 col-lg-3">Kindergarten</p>
-        <p class="col-xl-1 col-lg-1">Adresse</p>
-        <p class="col-xl-1 col-lg-1">Alter</p>
-        <p class="col-xl-1 col-lg-1">Geburtsdatum</p>
-        <p class="col-xl-1 col-lg-1"></p>
-    </div>
-    <!-- Datenzeilen -->
-    <div *ngFor="let child of storeService.children" class="row justify-content-center align-items-center data-row">
-        <!-- Datenfelder für jedes Kind -->
-        <p class="col-xl-2 col-lg-3">{{child.name}}</p>
-        <p class="col-xl-2 col-lg-3">{{child.kindergarden.name}}</p>
-        <p class="col-xl-1 col-lg-1">{{child.kindergarden.address}}</p>
-        <p class="col-xl-1 col-lg-1">{{getAge(child.birthDate)}}</p>
-        <p class="col-xl-1 col-lg-1">{{child.birthDate | date:'longDate'}}</p>
-        <div class="col-xl-1 col-lg-1">
-            <button mat-button (click)="cancelRegistration(child.id)">Kind abmelden</button>
-        </div>
-    </div>
+<div *ngIf="isLoading" class="loading-spinner">
+  <mat-spinner></mat-spinner>
+</div>
 
-    <!-- Paginator -->
-    <div class="row paginator">
-        <div class="col-12 d-flex justify-content-center">
-            <button mat-button [ngClass]="page == currentPage ? 'active' : ''" (click)="selectPage(page)" type="button" *ngFor="let page of returnAllPages()">{{page}}</button>
-        </div>
+<div *ngIf="!isLoading" class="container">
+  <!-- Filter- und Sortieroptionen -->
+  <div class="row justify-content-center align-items-center">
+    <!-- Filter Dropdown -->
+    <mat-form-field class="col-xl-3">
+      <mat-label>Kindergarten</mat-label>
+      <mat-select (selectionChange)="onKindergartenFilterChange($event.value)">
+        <mat-option *ngFor="let kg of storeService.kindergardens" [value]="kg.id">{{kg.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Sortieroptionen -->
+    <div class="col-xl-3">
+      <button mat-button (click)="onSort('name', 'asc')">Name Aufsteigend</button>
+      <button mat-button (click)="onSort('name', 'desc')">Name Absteigend</button>
     </div>
+    <div class="col-xl-3">
+      <button mat-button (click)="onSort('birthDate', 'asc')">Anmeldedatum Aufsteigend</button>
+      <button mat-button (click)="onSort('birthDate', 'desc')">Anmeldedatum Absteigend</button>
+    </div>
+  </div>
+
+  <!-- Kopfzeile der Tabelle -->
+  <div class="row justify-content-center align-items-center data-header">
+    <!-- Spaltenüberschriften -->
+    <p class="col-xl-2 col-lg-3">Name</p>
+    <p class="col-xl-2 col-lg-3">Kindergarten</p>
+    <p class="col-xl-1 col-lg-1">Adresse</p>
+    <p class="col-xl-1 col-lg-1">Alter</p>
+    <p class="col-xl-1 col-lg-1">Geburtsdatum</p>
+    <p class="col-xl-1 col-lg-1"></p>
+  </div>
+
+  <!-- Datenzeilen -->
+  <div *ngFor="let child of storeService.children" class="row justify-content-center align-items-center data-row">
+    <!-- Datenfelder für jedes Kind -->
+    <p class="col-xl-2 col-lg-3">{{child.name}}</p>
+    <p class="col-xl-2 col-lg-3">{{child.kindergarden.name}}</p>
+    <p class="col-xl-1 col-lg-1">{{child.kindergarden.address}}</p>
+    <p class="col-xl-1 col-lg-1">{{getAge(child.birthDate)}}</p>
+    <p class="col-xl-1 col-lg-1">{{child.birthDate | date:'longDate'}}</p>
+    <div class="col-xl-1 col-lg-1">
+      <button mat-button (click)="cancelRegistration(child.id)">Kind abmelden</button>
+    </div>
+    <!-- Link zur Detailseite des Kindergartens -->
+    <div class="col-xl-1 col-lg-1">
+      <a [routerLink]="['/kindergarten', child.kindergardenId]" mat-button>Details</a>
+    </div>
+  </div>
+
+  <!-- Paginator -->
+  <div class="row paginator">
+    <div class="col-12 d-flex justify-content-center">
+      <button mat-button [ngClass]="page == currentPage ? 'active' : ''" (click)="selectPage(page)" type="button" *ngFor="let page of returnAllPages()">{{page}}</button>
+    </div>
+  </div>
 </div>

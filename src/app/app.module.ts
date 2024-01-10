@@ -19,6 +19,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { AboutPageComponent} from "./about-page/about-page.component";
+import { KindergartenDetailComponent } from './kindergarten-detail/kindergarten-detail.component';
+import { TypTransformPipe} from "./typ-transform.pipe";
+import { KindergartensListComponent } from './kindergartens-list/kindergartens-list.component';
+import { MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -27,7 +32,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     AddDataComponent,
     DataComponent,
     HeaderComponent,
-    ButtonComponent
+    ButtonComponent,
+    AboutPageComponent,
+    KindergartenDetailComponent,
+    TypTransformPipe,
+    KindergartensListComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +54,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatCardModule,
     MatSnackBarModule,
     MatToolbarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   public title: string = 'Matthias-Reihs_Kindergarden_HA';
-  public imagePath: string = "./../assets/images/kindergarden.jpg";
+  public imagePath: string = "./../assets/images/OLD.jpg";
 
   constructor() { }
 

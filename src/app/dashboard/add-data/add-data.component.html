@@ -1,41 +1,46 @@
-<form *ngIf="addChildForm" [formGroup]="addChildForm" (ngSubmit)="onSubmit()">
+<div *ngIf="isLoading" class="loading-spinner">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!isLoading">
+  <form *ngIf="addChildForm" [formGroup]="addChildForm" (ngSubmit)="onSubmit()">
     <h2>Ihr Kind anmelden!</h2>
 
     <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Name" formControlName="name">
-        <mat-error *ngIf="addChildForm.get('name')?.errors?.['required']">
-            Name ist erforderlich.
-        </mat-error>
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" formControlName="name">
+      <mat-error *ngIf="addChildForm.get('name')?.errors?.['required']">
+        Name ist erforderlich.
+      </mat-error>
     </mat-form-field><br />
 
     <mat-form-field>
-        <mat-label>Geburtsdatum</mat-label>
-        <input matInput [matDatepicker]="picker" placeholder="Geburtsdatum" formControlName="birthDate">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="addChildForm.get('birthDate')?.errors?.['required']">
-            Geburtsdatum ist erforderlich.
-        </mat-error>
+      <mat-label>Geburtsdatum</mat-label>
+      <input matInput [matDatepicker]="picker" placeholder="Geburtsdatum" formControlName="birthDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="addChildForm.get('birthDate')?.errors?.['required']">
+        Geburtsdatum ist erforderlich.
+      </mat-error>
     </mat-form-field><br />
 
     <mat-form-field>
-        <mat-label>Kindergarten</mat-label>
-        <mat-select formControlName="kindergardenId">
-            <mat-option value="" disabled>Bitte auswählen</mat-option>
-            <mat-option *ngFor="let kindergarden of storeService.kindergardens" [value]="kindergarden.id">
-                {{kindergarden.name}}, {{kindergarden.address}}
-            </mat-option>
-        </mat-select>
-        <mat-error *ngIf="addChildForm.get('kindergardenId')?.errors?.['required']">
-            Auswahl eines Kindergartens ist erforderlich.
-        </mat-error>
+      <mat-label>Kindergarten</mat-label>
+      <mat-select formControlName="kindergardenId">
+        <mat-option value="" disabled>Bitte auswählen</mat-option>
+        <mat-option *ngFor="let kindergarden of storeService.kindergardens" [value]="kindergarden.id">
+          {{kindergarden.name}}, {{kindergarden.address}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="addChildForm.get('kindergardenId')?.errors?.['required']">
+        Auswahl eines Kindergartens ist erforderlich.
+      </mat-error>
     </mat-form-field><br />
 
     <button mat-button type="submit">Erfassen</button>
-</form>
+  </form>
 
-<div aria-live="polite" aria-atomic="true" style="position: relative; z-index: 1050;">
+  <div aria-live="polite" aria-atomic="true" style="position: relative; z-index: 1050;">
     <div class="toast" style="position: absolute; top: 0; right: 0;" id="successToast">
       <div class="toast-header">
         <strong class="mr-auto">Kindergarten App</strong>
@@ -49,3 +54,4 @@
       </div>
     </div>
   </div>
+</div>

@@ -1,16 +1,22 @@
 /* Stil für die Kopfzeile der Tabelle */
 .data-header {
-    color: #ffffff; 
-    background-color: #555555;
-  }
-  
-  /* Stil für jede Zeile mit Kinderdaten */
-  .data-row {
-    color: #000000; 
-    background-color: #ffffff; 
-  }
-  
-  /* Stil für den Paginator */
-  .paginator {
-    color: #000000; 
-  }
+  color: #ffffff;
+  background-color: #555555;
+}
+
+/* Stil für jede Zeile mit Kinderdaten */
+.data-row {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+/* Stil für den Paginator */
+.paginator {
+  color: #000000;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
