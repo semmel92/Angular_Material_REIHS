@@ -11,7 +11,7 @@ import { StoreService } from 'src/app/shared/store.service';
 export class DashboardComponent {
   public currentPage: number = 1;
   public showAddData = true;
-  public isLoading = false; // Zustandsvariable für den Ladestatus
+  public isLoading = false;
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   totalItems = 100;

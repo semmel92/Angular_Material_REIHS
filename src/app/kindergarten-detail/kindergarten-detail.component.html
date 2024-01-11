@@ -3,11 +3,13 @@
 </div>
 
 <div *ngIf="!isLoading" class="kindergarten-detail-container">
-  <h1>{{ kindergarten?.name }}</h1>
+  <h1>Details zum Kindergarten: {{ kindergarten?.name }}</h1>
+
   <div class="details">
     <p><strong>Adresse:</strong> {{ kindergarten?.address }}</p>
     <p><strong>Typ:</strong> {{ kindergarten ? (kindergarten.typ | typTransform) : 'Unbekannt' }}</p>
   </div>
+
   <div class="gallery">
     <h2>Bildergalerie</h2>
     <div class="images">
