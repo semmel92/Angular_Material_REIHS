@@ -14,6 +14,7 @@
         Bitte geben Sie den Namen ein.
       </mat-error>
       <mat-error *ngIf="addChildForm.get('name')?.errors?.['maxlength']">
+
         Der Name darf maximal 50 Zeichen lang sein.
       </mat-error>
     </mat-form-field>
@@ -21,7 +22,8 @@
 
     <mat-form-field>
       <mat-label>Geburtsdatum Ihres Kindes</mat-label>
-      <input matInput [matDatepicker]="picker" placeholder="Geburtsdatum" formControlName="birthDate" matTooltip="Geben Sie das Geburtsdatum Ihres Kindes ein">
+      <input matInput [matDatepicker]="picker" placeholder="Geburtsdatum" formControlName="birthDate"
+             matTooltip="Geben Sie das Geburtsdatum Ihres Kindes ein">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="addChildForm.get('birthDate')?.touched && addChildForm.get('birthDate')?.errors?.['required']">
@@ -38,7 +40,8 @@
           {{kindergarden.name}}, {{kindergarden.address}}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="addChildForm.get('kindergardenId')?.touched && addChildForm.get('kindergardenId')?.errors?.['required']">
+      <mat-error
+        *ngIf="addChildForm.get('kindergardenId')?.touched && addChildForm.get('kindergardenId')?.errors?.['required']">
         Bitte wählen Sie einen Kindergarten aus.
       </mat-error>
     </mat-form-field>

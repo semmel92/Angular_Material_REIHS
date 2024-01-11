@@ -3,13 +3,11 @@
 </div>
 
 <div *ngIf="!isLoading" class="container">
-  <!-- Hinzufügen einer klaren Überschrift -->
   <h1>Verwaltung der Kindergarten-Anmeldungen</h1>
   <h2>Tabellarische Übersicht der Anmeldungen</h2>
 
-  <!-- Filter- und Sortieroptionen -->
   <div class="row justify-content-center align-items-center">
-    <!-- Filter Dropdown -->
+
     <mat-form-field class="col-xl-3">
       <mat-label>Kindergarten auswählen</mat-label>
       <mat-select (selectionChange)="onKindergartenFilterChange($event.value)" matTooltip="Filtern nach Kindergarten">
@@ -17,18 +15,25 @@
       </mat-select>
     </mat-form-field>
 
-    <!-- Sortieroptionen -->
+
     <div class="col-xl-3">
-      <button mat-button (click)="onSort('name', 'asc')" matTooltip="Sortieren nach Namen aufsteigend">Name Aufsteigend</button>
-      <button mat-button (click)="onSort('name', 'desc')" matTooltip="Sortieren nach Namen absteigend">Name Absteigend</button>
+      <button mat-button (click)="onSort('name', 'asc')" matTooltip="Sortieren nach Namen aufsteigend">Name
+        Aufsteigend
+      </button>
+      <button mat-button (click)="onSort('name', 'desc')" matTooltip="Sortieren nach Namen absteigend">Name Absteigend
+      </button>
     </div>
     <div class="col-xl-3">
-      <button mat-button (click)="onSort('birthDate', 'asc')" matTooltip="Sortieren nach Anmeldedatum aufsteigend">Anmeldedatum Aufsteigend</button>
-      <button mat-button (click)="onSort('birthDate', 'desc')" matTooltip="Sortieren nach Anmeldedatum absteigend">Anmeldedatum Absteigend</button>
+      <button mat-button (click)="onSort('birthDate', 'asc')" matTooltip="Sortieren nach Anmeldedatum aufsteigend">
+        Anmeldedatum Aufsteigend
+      </button>
+      <button mat-button (click)="onSort('birthDate', 'desc')" matTooltip="Sortieren nach Anmeldedatum absteigend">
+        Anmeldedatum Absteigend
+      </button>
     </div>
   </div>
 
-  <!-- Kopfzeile der Tabelle -->
+
   <div class="row justify-content-center align-items-center data-header">
     <!-- Spaltenüberschriften -->
     <p class="col-xl-2 col-lg-3">Name</p>
@@ -48,10 +53,12 @@
     <p class="col-xl-1 col-lg-1">{{getAge(child.birthDate)}}</p>
     <p class="col-xl-1 col-lg-1">{{child.birthDate | date:'longDate'}}</p>
     <div class="col-xl-1 col-lg-1">
-      <button mat-button (click)="cancelRegistration(child.id)" matTooltip="Kind von der Liste abmelden">Kind abmelden</button>
+      <button mat-button (click)="cancelRegistration(child.id)" matTooltip="Kind von der Liste abmelden">Kind abmelden
+      </button>
     </div>
     <div class="col-xl-1 col-lg-1">
-      <a [routerLink]="['/kindergarten', child.kindergardenId]" mat-button matTooltip="Zu den Details des Kindergartens">Details</a>
+      <a [routerLink]="['/kindergarten', child.kindergardenId]" mat-button
+         matTooltip="Zu den Details des Kindergartens">Details</a>
     </div>
   </div>
 

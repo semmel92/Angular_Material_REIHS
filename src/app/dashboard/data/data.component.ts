@@ -1,12 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BackendService } from 'src/app/shared/backend.service';
-import { CHILDREN_PER_PAGE } from 'src/app/shared/constants';
-import { StoreService } from 'src/app/shared/store.service';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {BackendService} from 'src/app/shared/backend.service';
+import {CHILDREN_PER_PAGE} from 'src/app/shared/constants';
+import {StoreService} from 'src/app/shared/store.service';
 
 @Component({
-  selector: 'app-data',
-  templateUrl: './data.component.html',
-  styleUrls: ['./data.component.scss']
+  selector: 'app-data', templateUrl: './data.component.html', styleUrls: ['./data.component.scss']
 })
 export class DataComponent implements OnInit {
   @Input() currentPage!: number;
@@ -14,7 +12,8 @@ export class DataComponent implements OnInit {
   public page: number = 0;
   public isLoading = false;
 
-  constructor(public storeService: StoreService, private backendService: BackendService) {}
+  constructor(public storeService: StoreService, private backendService: BackendService) {
+  }
 
   ngOnInit(): void {
     this.loadData();
@@ -76,7 +75,7 @@ export class DataComponent implements OnInit {
 
   onKindergartenFilterChange(kindergardenId: number): void {
     this.isLoading = true;
-    this.backendService.getChildren(this.currentPage, { kindergardenId }).subscribe(data => {
+    this.backendService.getChildren(this.currentPage, {kindergardenId}).subscribe(data => {
       this.storeService.children = data;
       this.isLoading = false;
     }, error => {
@@ -87,7 +86,7 @@ export class DataComponent implements OnInit {
 
   onSort(field: string, order: 'asc' | 'desc'): void {
     this.isLoading = true;
-    this.backendService.getChildren(this.currentPage, undefined, { field, order }).subscribe(data => {
+    this.backendService.getChildren(this.currentPage, undefined, {field, order}).subscribe(data => {
       this.storeService.children = data;
       this.isLoading = false;
     }, error => {

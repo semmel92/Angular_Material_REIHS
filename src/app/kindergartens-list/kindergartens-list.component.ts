@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { StoreService } from '../shared/store.service';
+import {Component} from '@angular/core';
+import {StoreService} from '../shared/store.service';
 
 @Component({
   selector: 'app-kindergartens-list',
@@ -7,7 +7,8 @@ import { StoreService } from '../shared/store.service';
   styleUrls: ['./kindergartens-list.component.scss']
 })
 export class KindergartensListComponent {
-  constructor(public storeService: StoreService) {}
+  constructor(public storeService: StoreService) {
+  }
 
   getKindergartenImageUrl(id: number): string {
     return `assets/images/kindergarten${id}.png`;

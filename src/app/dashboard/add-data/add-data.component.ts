@@ -25,14 +25,14 @@ export class AddDataComponent implements OnInit {
 
   onSubmit() {
     if (this.addChildForm && this.addChildForm.valid) {
-      this.isLoading = true; // Spinner anzeigen
+      this.isLoading = true;
       this.backendService.addChildData(this.addChildForm.value).subscribe({
         next: (_) => {
-          this.isLoading = false; // Spinner ausblenden
+          this.isLoading = false;
           this.snackBar.open('Das Kind wurde erfolgreich angemeldet!', 'Schließen', {duration: 3000});
           this.backendService.getChildren(this.currentPage);
         }, error: (error) => {
-          this.isLoading = false; // Spinner ausblenden
+          this.isLoading = false;
           console.error('Fehler beim Hinzufügen des Kindes:', error);
         }
       });
